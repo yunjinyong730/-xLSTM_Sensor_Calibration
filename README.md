@@ -20,7 +20,7 @@
   2) 스칼라 셀이라 저장 용량 작음  
   3) 메모리 믹싱 탓에 완전 병렬화 어려움
 
-- xLSTM 핵심 아이디어 이렇다임
+- xLSTM 핵심 아이디어
   - 지수 게이팅 + 정규화/안정화로 수치 안정성 확보하면서 강력한 갱신력 얻음  
   - 행렬 메모리 + 공분산 업데이트로 키-값 저장/검색 내장 → 장기·희소 패턴에 강함  
   - Residual 블록으로 깊게 쌓는 구조 채택(Pre/Post up-projection)함
@@ -41,7 +41,7 @@ n_t = f_t\,n_{t-1} + i_t$$
 $$\hat{h}_t = \frac{c_t}{n_t},\qquad
 h_t = o_t\,\hat{h}_t$$
 
-- 게이트 정의 이렇다
+- 게이트 정의
 
 $$i_t=\exp(\tilde{i}_t),\quad
 f_t \in \{\sigma(\tilde{f}_t),\,\exp(\tilde{f}_t)\},\quad
