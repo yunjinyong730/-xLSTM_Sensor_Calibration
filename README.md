@@ -4,7 +4,7 @@
 
 ---
 
-## TL;DR임
+## TL;DR
 
 - xLSTM, **지수 게이트** 도입 + **메모리 스칼라→행렬 확장**으로 저장/갱신력 크게 상승함  
 - **sLSTM**: 지수 입력/망각 게이트 + 정규화자/안정화자 도입 → 새로운 강한 증거 오면 기억 재평가/교체 쉬움  
@@ -13,7 +13,7 @@
 
 ---
 
-## 문제의식과 핵심 메시지임
+## 문제의식과 핵심 메시지
 
 - 전통 LSTM 한계 있음
   1) 저장값 강한 재수정 어려움  
@@ -27,11 +27,11 @@
 
 ---
 
-## 모델 개요임
+## 모델 개요
 
 > sLSTM(스칼라 메모리) + mLSTM(행렬 메모리)을 Residual 블록으로 감싸 스택한 아키텍처임
 
-### 1) sLSTM (Scalar LSTM with Exponential Gates)임
+### 1) sLSTM (Scalar LSTM with Exponential Gates)
 
 - 상태 업데이트 식 아래와 같음
 
@@ -41,7 +41,7 @@ n_t = f_t\,n_{t-1} + i_t$$
 $$\hat{h}_t = \frac{c_t}{n_t},\qquad
 h_t = o_t\,\hat{h}_t$$
 
-- 게이트 정의 이렇다임
+- 게이트 정의 이렇다
 
 $$i_t=\exp(\tilde{i}_t),\quad
 f_t \in \{\sigma(\tilde{f}_t),\,\exp(\tilde{f}_t)\},\quad
@@ -50,7 +50,7 @@ o_t=\sigma(\tilde{o}_t)$$
 - 지수 게이트 강력하나 수치 폭주 위험 있음 → 안정화 상태 $m_t$ 사용해 $i_t', f_t'$ 재정의하여 출력/미분 동등성 유지함  
 - 메모리 믹싱은 **헤드 내부** 재귀($R_z,R_i,R_f,R_o$)만 허용함 → 상태 추적 능력 강화됨
 
-### 2) mLSTM (Matrix LSTM with Covariance Memory)임
+### 2) mLSTM (Matrix LSTM with Covariance Memory)
 
 - 행렬 메모리 $C_t \in \mathbb{R}^{d\times d}$ 사용함. 저장은 공분산 규칙 따름
 
@@ -64,7 +64,7 @@ $$h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \righ
 - BAM/Fast Weights 전통과 연결됨. $f_t$는 감쇠율, $i_t$는 학습률에 해당함  
 - 메모리 믹싱 없음 → 완전 병렬화 가능함. 긴 컨텍스트에 유리함
 
-### 3) xLSTM 블록(Residual) & 스택임
+### 3) xLSTM 블록(Residual) & 스택
 
 - sLSTM 블록: **Post up-projection** 방식(Transformer식) → sLSTM 뒤 게이트드 MLP 붙임  
 - mLSTM 블록: **Pre up-projection** 방식(SSM식) → MLP ↑ → mLSTM → MLP ↓ 구성함  
@@ -72,7 +72,7 @@ $$h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \righ
 
 ---
 
-## 왜 효과적인지임
+## 왜 효과적인지
 
 - 지수 게이트, 새로운 강한 증거 등장 시 기존 기억 가중 기하급수적으로 조정함 → 재평가/교체 쉬움. 정규화자/안정화자로 수치 폭주 방지됨  
 - 행렬 메모리, 키-값 직접 저장/검색하는 연합 기억이라 희귀/장기 상관 포착 유리함. 공분산 업데이트가 신호/잡음비 개선함  
@@ -80,7 +80,7 @@ $$h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \righ
 
 ---
 
-## 설계 포인트(실무 체크리스트)임
+## 설계 포인트(실무 체크리스트)
 
 - 지수 게이트 안정화 필수임 → $m_t$ 기반으로 $i_t', f_t'$ 정의해 출력/그라디언트 보존 + 안정화 달성함  
 - sLSTM 메모리 믹싱은 **헤드 내부**로 제한함 → 스택/괄호류 상태 추적에 유리함  
@@ -89,7 +89,7 @@ $$h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \righ
 
 ---
 
-## 실험 결과 요약임
+## 실험 결과 요약
 
 - 데이터/비교군: SlimPajama 등 대규모 토큰(예: 300B) 사용함. 비교: Llama / Mamba / RWKV 등 포함함. 1.3B~ 다양한 크기, 길이 외삽(2k→16k) 검증함  
 - 스케일링 법칙 양호함 → 파라미터/데이터 늘려도 성능 이득 일관됨  
@@ -98,21 +98,21 @@ $$h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \righ
 
 ---
 
-## 어블레이션 인사이트임
+## 어블레이션 인사이트
 
 - 지수 게이팅 + 행렬 메모리 결합이 성능 핵심 동력임 → 기본 LSTM에서 구성 요소 추가할수록 PPL 꾸준히 하락함  
 - 게이트를 입력/히든 의존형으로 둘 때 고정 감쇠/선형 규칙보다 성능 우수함
 
 ---
 
-## 메모리·속도 관점임
+## 메모리·속도 관점
 
 - 복잡도: 컨텍스트 길이 $L$에 **시간 $\mathcal{O}(L)$**, **메모리 상수**임. RNN이라 KV 캐시 증가 없음  
 - 실측: 1.3B 규모에서도 생성 시간 선형, 처리량 우수함. Transformer는 배치 커질수록 메모리 병목 생김
 
 ---
 
-## 한계와 향후 과제임
+## 한계와 향후 과제
 
 - sLSTM 순차성 존재함 → 완전 병렬화 어려움. 커스텀 CUDA로 완화 가능하나 mLSTM 대비 속도 불리할 수 있음  
 - mLSTM 연산비 큼 → $d\times d$ 업데이트/읽기 최적화 여지 큼  
@@ -121,7 +121,7 @@ $$h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \righ
 
 ---
 
-## 결론임
+## 결론
 
 - xLSTM, **지수 게이팅** + **행렬 메모리**로 **재평가 쉬운 기억 + 대용량 연합 기억 + 병렬성** 동시에 확보함  
 - Residual 블록 스택으로 대규모 모델 구성 시 **스케일링·긴 문맥·처리량** 장점 확실함  
@@ -129,7 +129,7 @@ $$h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \righ
 
 ---
 
-## 부록: 구현 체크리스트(요약)임
+## 부록: 구현 체크리스트(요약)
 
 - sLSTM
   - 게이트: $i_t=\exp(\tilde{i}_t)$, $f_t=\sigma(\tilde{f}_t)$ 또는 $\exp(\tilde{f}_t)$, $o_t=\sigma(\tilde{o}_t)$ 사용함  
