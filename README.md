@@ -39,10 +39,8 @@
 - 핵심 상태 업데이트
 
   
-  $$
-  c_t = f_t\,c_{t-1} + i_t\,z_t,\qquad
-  n_t = f_t\,n_{t-1} + i_t
-  $$
+  $$c_t = f_t\,c_{t-1} + i_t\,z_t,\qquad
+  n_t = f_t\,n_{t-1} + i_t$$
 
   $$
   \hat{h}_t = \frac{c_t}{n_t}, \qquad
