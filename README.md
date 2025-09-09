@@ -42,19 +42,15 @@
   $$c_t = f_t\,c_{t-1} + i_t\,z_t,\qquad
   n_t = f_t\,n_{t-1} + i_t$$
 
-  $$
-  \hat{h}_t = \frac{c_t}{n_t}, \qquad
-  h_t = o_t\,\hat{h}_t
-  $$
+  $$\hat{h}_t = \frac{c_t}{n_t}, \qquad
+  h_t = o_t\,\hat{h}_t$$
 
 - 게이트(지수/시그모이드 혼합 가능)
 
   
-  $$
-  i_t = \exp(\tilde{i}_t),\quad
+  $$i_t = \exp(\tilde{i}_t),\quad
   f_t \in \{\sigma(\tilde{f}_t),\,\exp(\tilde{f}_t)\},\quad
-  o_t = \sigma(\tilde{o}_t)
-  $$
+  o_t = \sigma(\tilde{o}_t)$$
 
   > 지수 게이트는 강력하지만 수치 폭주 위험이 있으므로, 안정화 상태 $m_t$ 를 사용해 **출력/미분 동등성**을 유지하는 $i_t', f_t'$ 로 재정의(정규화)합니다.
 
@@ -66,17 +62,13 @@
 - **행렬 메모리 $C_t \in \mathbb{R}^{d\times d}$**: 키 $k_t$, 값 $v_t$ 를 공분산 규칙으로 저장
 
   
-  $$
-  C_t = f_t\,C_{t-1} + i_t\,v_t\,k_t^\top,\qquad
-  n_t = f_t\,n_{t-1} + i_t\,k_t
-  $$
+  $$C_t = f_t\,C_{t-1} + i_t\,v_t\,k_t^\top,\qquad
+  n_t = f_t\,n_{t-1} + i_t\,k_t$$
 
   읽기(read):
 
   
-  $$
-  h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \right)
-  $$
+  $$h_t = o_t \odot \left( \frac{C_t\,q_t}{\max\big(|n_t^\top q_t|,\,1\big)} \right)$$
 
 - 의미  
   **BAM/Fast Weights** 전통과 연결됩니다. $f_t$는 **감쇠율**, $i_t$는 **학습률**에 해당합니다. **메모리 믹싱이 없어 완전 병렬화**가 가능합니다.
