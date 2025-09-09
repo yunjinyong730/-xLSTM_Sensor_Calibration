@@ -1,6 +1,9 @@
 # xLSTM_Sensor_Calibration
 🧑🏻‍💻xLSTM implementation ver. Sensor Calibration
 
+# xLSTM: **확장 LSTM**으로 다시 뛰는 대규모 시퀀스 모델
+
+> 아래 문서는 **PatchMLP 문서의 구성/흐름을 그대로** 따르면서, xLSTM 논문을 **쉽고 직관적으로** 풀어쓴 해설입니다. 수식은 꼭 필요한 곳에만 쓰고, “왜/어떻게” 중심으로 설명합니다.
 
 ---
 
@@ -112,6 +115,20 @@
 
 xLSTM은 **게이팅을 지수적으로 강화**하고 **메모리를 행렬화**함으로써, **재평가가 쉬운 기억 + 대용량 연합 기억 + 병렬성**을 동시에 얻습니다. Residual 블록으로 쌓아 **대규모 모델**을 만들었을 때, **스케일링·긴 문맥·처리량**에서 두각을 보이며 **Transformer/SSM/RNN** 계열과 폭넓게 경쟁 혹은 우위에 섭니다. :contentReference[oaicite:34]{index=34}
 
+---
+
+## 부록: 구현 체크리스트 (요약)
+
+- **sLSTM**
+  - \(i_t=\exp(\tilde i_t)\), \(f_t=\sigma(\tilde f_t)\) *또는* \(\exp(\tilde f_t)\), \(o_t=\sigma(\tilde o_t)\).  
+  - **안정화자 \(m_t\)** 로 \(i'_t,f'_t\) 재정의(출력/미분 보존) — **반드시 적용**. :contentReference[oaicite:35]{index=35}  
+  - **메모리 믹싱**: 헤드 내부에만(recurrent 연결 \(R_z,R_i,R_f,R_o\)). :contentReference[oaicite:36]{index=36}
+- **mLSTM**
+  - 저장: \(C_t = f_t C_{t-1} + i_t v_t k_t^\top\), 읽기: \(h_t = o_t \odot (C_t q_t / \max(|n_t^\top q_t|,1))\). :contentReference[oaicite:37]{index=37}  
+  - **메모리 믹싱 없음 → 완전 병렬화 가능**. sLSTM과 같은 안정화 기법 사용. :contentReference[oaicite:38]{index=38}  
+- **블록/아키텍처**
+  - sLSTM=**Post up-proj**, mLSTM=**Pre up-proj**, 둘 다 **Residual + (옵션) Conv + Gated MLP**. :contentReference[oaicite:39]{index=39}
+
+---
 
 
-*본 해설은 업로드하신 원문(XLSTM.pdf)을 바탕으로 작성되었습니다.*
