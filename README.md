@@ -1,6 +1,6 @@
 # xLSTM_Sensor_Calibration
 
-> PatchMLP 문서 흐름 그대로 재구성했음. 수식 표기는 GitHub 수식(GFM/KaTeX) 사용함. 
+> PatchMLP 문서 흐름 그대로 재구성했음. 보다 직관적인 문서임에 주의할 것
 
 ---
 
