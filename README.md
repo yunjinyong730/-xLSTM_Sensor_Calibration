@@ -1,7 +1,4 @@
 # xLSTM_Sensor_Calibration
-🧑🏻‍💻xLSTM implementation ver. Sensor Calibration
-
-# xLSTM: **확장 LSTM**으로 다시 뛰는 대규모 시퀀스 모델
 
 > 아래 문서는 **PatchMLP 문서의 구성/흐름을 그대로** 따르면서, xLSTM 논문을 **직관적으로** 풀어쓴 해설입니다. 
 
