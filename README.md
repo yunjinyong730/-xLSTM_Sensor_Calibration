@@ -45,10 +45,7 @@
 ---
 
 ## 학습/손실 및 멀티변수 예측으로의 일반화
-- **출력 생성**: 최종 층의
-```math
-[P^{(L)}_{\mathrm{patch}},\, G^{(L)}_{\mathrm{global}}] \stackrel{\mathrm{Linear}}{\longrightarrow} \hat{x}_{T+1:T+S}
-을 선형 사상 후 예측
+- **출력 생성**: 최종 층의 `$[P^{(L)}_{\mathrm{patch}},\, G^{(L)}_{\mathrm{global}}] \stackrel{\mathrm{Linear}}{\longrightarrow} \hat{x}_{T+1:T+S}$`을 선형 사상 후 예측
 - **손실**: **L2(제곱 오차)**  
 - **멀티변수 예측**: 각 변수를 “내생”으로 두고 **나머지 변수는 외생으로 병렬 처리**(채널 독립), **Self/Cross-Attn 층 공유**.
 
