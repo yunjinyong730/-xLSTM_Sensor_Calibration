@@ -1,4 +1,4 @@
-# TimeXer — 외생 변수(Exogenous Variables)를 통한 시계열 예측 강화
+# TimeXer — 외생 변수(Exogenous Variables)를 통한 시계열 예측 강화 논문 정리
 
 > **논문**: *TimeXer: Empowering Transformers for Time Series Forecasting with Exogenous Variables (NeurIPS 2024)*  
 > **저자/소속**: Tsinghua Univ. BNRist  
