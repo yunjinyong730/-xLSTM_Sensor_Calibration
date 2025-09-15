@@ -17,6 +17,16 @@ _________________________________________________________________
 Inference time: 1.866 seconds
 Throughput: 16016.67 samples/second
 
+<img width="1000" height="400" alt="Antwerp_pm10_w360" src="https://github.com/user-attachments/assets/b628bbd7-070d-4f65-8a87-da5c7bcf4b41" />   <br>
+val rmse : 8.589814186096191, test rmse : 13.827042579650879
+<img width="1000" height="400" alt="oslo_pm10_w360" src="https://github.com/user-attachments/assets/ca9bcb51-41d1-4eed-8ee9-b2369c3bc798" />   <br>
+val rmse : 9.852630615234375, test rmse : 15.736166954040527
+<img width="1000" height="400" alt="Zagreb_pm10_w360" src="https://github.com/user-attachments/assets/9f4fd5ad-93f4-481f-9e5b-7a158fcc4f55" />   <br>
+val rmse : 17.27320098876953, test rmse : 14.202249526977539
+avg test rmse:  14.588486353556315 [13.827043, 15.736167, 14.20225]
+
+
+
 # TimeXer — 외생 변수(Exogenous Variables)를 통한 시계열 예측 강화 논문 정리
 
 > **논문**: *TimeXer: Empowering Transformers for Time Series Forecasting with Exogenous Variables (NeurIPS 2024)*  
