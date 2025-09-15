@@ -33,6 +33,8 @@
 ---
 
 ## 모델 아키텍처
+<img width="1041" height="454" alt="image" src="https://github.com/user-attachments/assets/63d05fe7-dc4d-4f53-84b1-53e47a551862" />
+
 **핵심 설계**:  
 1) **내생 임베딩(Endogenous)** — **비중첩 패치**로 나눈 뒤, **패치 토큰들**(temporal patch tokens) + **학습형 글로벌 토큰**(series-level global token) 구성. 글로벌 토큰이 **패치↔외생** 정보 통로 역할.  
 2) **외생 임베딩(Exogenous)** — **변수(variates) 단위 시계열 전체**를 **하나의 토큰**으로 임베딩(**variate token**). 결측/미정렬/주기·길이 상이성에 **자연 적응**.  
