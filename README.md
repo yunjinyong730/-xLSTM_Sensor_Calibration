@@ -28,8 +28,7 @@
 ## 문제 정의
 - **입력**: 내생 단변량 \(x_{1:T}\) 와 다수의 외생 변수 집합
 $$
-z^{(1)}_{1:T_{\mathrm{ex}}}, \dots, z^{(C)}_{1:T_{\mathrm{ex}}}
-$$
+z^{(1)}_{1:T_{\mathrm{ex}}}, \dots, z^{(C)}_{1:T_{\mathrm{ex}}}$$
   (내·외생의 **look-back 길이 불일치** 허용, \(T \neq T_{\mathrm{ex}}\))  
 - **목표**: 향후 \(S\) 스텝의 내생 시계열 \(\hat{x}_{T+1:T+S} = F_{\theta}\!\big(x_{1:T},\, z_{1:T_{\mathrm{ex}}}\big)\) 예측
 
