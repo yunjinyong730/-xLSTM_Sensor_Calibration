@@ -1,3 +1,22 @@
+# TimeXer_Sensor_Calibration
+Model: "model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_2 (InputLayer)        [(1, 360, 5)]             0         
+                                                                 
+ normalizer_1 (Normalizer)   (1, 360, 5)               0         
+                                                                 
+ timexer (TimeXer)           (1, 1)                    6745      
+                                                                 
+ denormalizer (Denormalizer  (1, 1)                    0         
+ )                                                               
+...
+_________________________________________________________________
+934/934 [==============================] - 2s 1ms/step
+Inference time: 1.866 seconds
+Throughput: 16016.67 samples/second
+
 # TimeXer — 외생 변수(Exogenous Variables)를 통한 시계열 예측 강화 논문 정리
 
 > **논문**: *TimeXer: Empowering Transformers for Time Series Forecasting with Exogenous Variables (NeurIPS 2024)*  
