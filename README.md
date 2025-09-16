@@ -1,5 +1,6 @@
 # TimeXer_Sensor_Calibration
 
+```
 Model: "model"
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
@@ -17,6 +18,7 @@ _________________________________________________________________
 934/934 [==============================] - 2s 1ms/step
 Inference time: 1.866 seconds
 Throughput: 16016.67 samples/second
+```
 
 <img width="1000" height="400" alt="Antwerp_pm10_w360" src="https://github.com/user-attachments/assets/b628bbd7-070d-4f65-8a87-da5c7bcf4b41" />   <br>
 <b>val rmse : 8.589814186096191, test rmse : 13.827042579650879</b>
